@@ -1,0 +1,12 @@
+{%extends 'base.html' %}
+
+
+{%block body_block%}
+<div class="container p-5">
+    <form action="" method="POST">
+        {%csrf_token%}
+        <div class="alert alert-danger">Are yOur sure to delete this post ?</div>
+        <input type="submit" value="Delete">
+    </form>
+</div>
+{%endblock%}

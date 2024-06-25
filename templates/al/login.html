@@ -1,0 +1,29 @@
+{%extends 'base.html'%}
+
+{%block body_block%}
+    <div class="container">
+       
+
+        <div class="form p-5">
+            <form action="" method="POST">
+                {%csrf_token%}
+
+                    <label for="username">Enter Your Username:</label>
+                    <input type="username" name="username" id="username">
+                    <br> <br>
+                    <label for="password">Enter Your Password:</label>
+                    <input type="password" name="password" id="password"><br><br>
+                    <input type="submit" class="btn btn-info btn-lg" value="Login">
+                  
+                    <div class="text-warning py-2">
+                        NOt Registered ? <a href="{% url 'signup' %}">Signup Here</a>
+                    </div>
+
+
+            </form>
+        </div>
+    </div>
+
+    </div>
+
+{%endblock%}

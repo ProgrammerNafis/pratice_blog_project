@@ -1,0 +1,21 @@
+{%extends 'base.html' %}
+
+
+{%block body_block%}
+<div class="container p-5">
+    {% for x in user.Blog_author.all %}
+    <h1>{{x.title}}</h1>
+    <span>{{x.publish_date}}</span>| <span>@{{x.author.username}}</span>
+    <div class="row g-5 py-5">
+      <div class="col-md-6 col-sm-12 col-lg-6">
+        <img src="{{x.image.url}}" width="100%" alt="">
+
+       </div>
+      <div class="col-md-6 col-sm-12 col-lg-6">
+        <p>   {{x.content|truncatewords:190|linebreaks}} .....<a href="{% url 'r' slug=x.slug %}" style="text-decoration: none;"> Read More</a>  </p> <a href="{% url 'upateBlog' pk=x.pk %}">Edit</a>| <a href="{% url 'bd' pk=x.pk %}">Delete</a>
+        
+      </div>
+    </div>
+    {%endfor%}
+</div>
+{%endblock%}

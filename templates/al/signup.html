@@ -1,0 +1,46 @@
+{%extends 'base.html'%}
+
+{%block body_block%}
+    <div class="container">
+        {% if reg %}
+        <div class="py-5">
+        <h1 class="alert alert-success"> Registreation Successfull!</h1>
+
+        {%else%}
+
+        <div class="form p-5">
+            <form action="" method="POST">
+                    {% for x in form %}
+                        {{x.label_tag}} {{x}} <br>
+                      <span class="text-danger" style="font-style: italic !important;">
+                        {{x.errors|striptags}}
+                      </span> <br> 
+                    {%endfor%}
+
+                    <br>
+                    <input type="submit" class="btn btn-lg btn-info" value="SignUP">
+                    <br>
+                    <div class="text-warning py-5">
+                        Already Registered ? <a href="{% url 'login' %}">Login Here</a>
+                    </div>
+
+
+                {%csrf_token%}
+            </form>
+        </div>
+    </div>
+    {%endif%}
+    </div>
+    {% if reg %}
+    <script>
+        var number = document.querySelector(".number");
+        var count = 1;
+        // Countdown Interval which runs on every 1s
+        var countdownInterval = setInterval(() => {
+            window.location.href = "http://127.0.0.1:8000/account/login";
+
+          
+        }, 1);
+      </script>
+    {%endif%}
+{%endblock%}

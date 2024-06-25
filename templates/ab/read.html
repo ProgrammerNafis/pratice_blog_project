@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+
+{% block body_block %}
+<div class="container">
+    <div class="row p-5 g-3">
+        
+        <div class="col-12">
+            <h1>{{blog.title}}</h1>
+            <h4 class="text-primary" style="display: inline-block; font-style: italic;">{{blog.liked_blog.count}} Likes</h4> | <h4 class="text-primary" style="display: inline-block; font-style: italic;">{{blog.blog_comment.count}} Comments</h4>
+            <hr>
+        <h3>{{blog.publish_date}}</h3> | <h3> Post By: @{{blog.author.username}}</h3> 
+            <img src="{{blog.image.url}}" width="100%" alt="">
+
+        </div>
+        <div class="col-12">
+            <p style="margin-top: 1rem !important; width: 50% !important;">
+                {{blog.content|linebreaks}}
+            </p>
+        </div>
+    </div>
+    <div class="condistion-likes p-5">
+
+        {% if liked%}
+        
+
+        <a href="{% url 'liked_post' pk=blog.pk %}" style="font-size: xx-large;">like</a>
+
+        {% else%}
+        <a href="{% url 'unliked_post' pk=blog.pk %}" style="font-size: xx-large;">UnLike</a>
+
+
+        {%endif%}
+    </div>
+        <div class="row">
+        <div class="col-6">
+            <div class="all-comments">
+                <h1>All commnets:</h1>
+                {% for x in blog.blog_comment.all %}
+                <div class="box bg-light" style="padding: 1rem !important;">
+                    <a href="">@{{x.user.username}}</a> | <span>{{x.comment_date}}</span>
+                    <p>{{x.comment}}</p>
+                    
+                </div>
+                {%endfor%}
+            </div>
+        </div>
+
+            <div class="col-6 comment-box p-5">
+               <form action="" method="POST">
+                {{form.as_p}}
+                {%csrf_token%}
+                <input type="submit" value="Comment" class="btn btn-lg btn-success">
+            </form>
+            </div>
+    </div>
+    
+    
+</div>
+
+{%endblock%}

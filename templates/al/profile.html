@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+
+{% block body_block%}
+ {% if user.is_authenticated %}
+    <div class="container py-5">
+
+        <div class="row">
+            <div class="col-sm-12 col-lg-6 col-md-6">
+                {% if user.user_profile %}
+                <div class="profile-pic">
+                    <img class="rounded-circle" style="margin: 0px 100px !important;" width="200px" height="200px" src="{{user.user_profile.profile_image.url}}" alt="">
+
+                   
+                </div>
+                
+                {% else %}
+                <div class="profile-pic">
+                    <img class="rounded-circle" style="margin: 0px 100px !important;" width="200px" height="200px"  src="/media/user-images\default-user.jpeg" alt="">
+                </div>
+               
+                
+                
+                {%endif%}
+
+                
+            </div>
+            <div class="col-sm-12 col-lg-6 col-md-6">
+                <div class="user-info p-5">
+                    <h1>@{{user.username}}</h1>
+                   {% if user.first_name and user.last_name %}
+                   <h1>{{user.first_name}} {{user.last_name}}</h1>
+                   {%endif%}
+                   
+                    <h1>{{user.email}}</h1>
+
+
+                </div>
+                <div class="update-prfo">
+                    <button class="btn btn-warning"> <a href="{% url 'update-profile' %}" style="text-decoration: none;">Update your profile here </a></button>
+                    <button class="btn btn-warning"> <a href="{% url 'update-password' %}" style="text-decoration: none;">Change your Password here </a></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{%else%}
+
+<div class="container">
+    <div class="alert alert-danger">Your are not allowed in this page, <a href="{% url 'signup' %}">Sign UP Here!</a></div>
+</div>
+
+{%endif%}
+{%endblock%}
